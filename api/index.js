@@ -15,7 +15,6 @@ mongoose.connect(mongoURL)
   .then(() => console.log('✅ MongoDB connected successfully!'))
   .catch(err => {
       console.error('MongoDB connection error:', err);
-      process.exit(1); 
   });
 
 // 2. MIDDLEWARE
