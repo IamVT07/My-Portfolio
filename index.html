@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vaibhav Tiwari - Web Developer Portfolio">
+    <meta name="author" content="Vaibhav Tiwari">
+    <title>Vaibhav's Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --red: #e11d48;
+            --red-light: #fda4af;
+            --red-glow: rgba(225,29,72,0.18);
+            --dark: #0d0d10;
+            --card-bg: rgba(255,255,255,0.04);
+            --border: rgba(225,29,72,0.18);
+        }
+
+        /* ─── NAV ─────────────────────────────────── */
+        .profile-image-wrapper { position:relative; display:inline-block; }
+        .profile-image-wrapper::before {
+            content:''; position:absolute; top:-10px; left:-10px; right:-10px; bottom:-10px;
+            background:linear-gradient(45deg,#e11d48,#fda4af,#e11d48);
+            border-radius:50%; z-index:-1; animation:rotate 3s linear infinite;
+        }
+        @keyframes rotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+        /* ─── HERO ────────────────────────────────── */
+        .hero { position:relative; background:linear-gradient(135deg,#0f0f12,#1a1a1f,#0f0f12); overflow:hidden; min-height:100vh; }
+        .shape { position:absolute; border-radius:50%; background:linear-gradient(45deg,rgba(225,29,72,0.08),rgba(253,164,175,0.04)); animation:floatShape 6s ease-in-out infinite; }
+        .shape-1 { width:80px;height:80px;top:20%;left:10%; }
+        .shape-2 { width:120px;height:120px;top:60%;right:15%;animation-delay:2s; }
+        .shape-3 { width:60px;height:60px;top:40%;left:80%;animation-delay:4s; }
+        @keyframes floatShape { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(180deg)} }
+
+        .hero-content { position:relative; z-index:2; }
+        .badge-text { background:linear-gradient(45deg,#e11d48,#fda4af); color:#fff; padding:8px 20px; border-radius:25px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; box-shadow:0 4px 15px rgba(225,29,72,.3); animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+        .hero-main-title { font-size:64px; font-weight:800; line-height:1.1; margin-bottom:20px; }
+        .title-line-1 { display:block; color:#d1d5db; font-size:.6em; margin-bottom:10px; }
+        .title-line-2 { display:block; background:linear-gradient(45deg,#fff,#e11d48,#fda4af); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero-subtitle { font-size:32px; color:#e11d48; margin-bottom:25px; font-weight:600; }
+        .typing-text { border-right:2px solid #e11d48; animation:blink 1s infinite; }
+        @keyframes blink { 0%,50%{border-color:#e11d48} 51%,100%{border-color:transparent} }
+        .hero-description { font-size:18px; color:#9ca3af; line-height:1.6; margin-bottom:30px; max-width:500px; }
+        .skill-chip { background:rgba(225,29,72,.1); color:#e11d48; padding:8px 16px; border-radius:20px; font-size:14px; font-weight:500; border:1px solid rgba(225,29,72,.3); transition:all .3s; display:inline-block; margin:4px 4px 4px 0; }
+        .skill-chip:hover { background:#e11d48; color:#fff; transform:translateY(-2px); }
+        .hero-image-container { position:relative; z-index:2; }
+        .image-glow { position:absolute; top:-30px;left:-30px;right:-30px;bottom:-30px; background:linear-gradient(45deg,#e11d48,#fda4af,#e11d48); border-radius:30px; opacity:.15; animation:pulseGlow 3s ease-in-out infinite; z-index:-2; filter:blur(20px); }
+        @keyframes pulseGlow { 0%,100%{opacity:.15;transform:scale(1)} 50%{opacity:.25;transform:scale(1.05)} }
+        .hero-image { border-radius:25px; box-shadow:0 25px 50px rgba(0,0,0,.4); transition:all .4s; object-fit:cover; width:100%; max-width:500px; height:auto; }
+        .hero-image:hover { transform:scale(1.02) translateY(-5px); box-shadow:0 35px 70px rgba(225,29,72,.3); }
+
+        /* ─── ABOUT ───────────────────────────────── */
+        .title-underline { width:60px;height:3px;background:linear-gradient(45deg,#e11d48,#fda4af);margin-bottom:20px;border-radius:2px; }
+        .skill-tag { display:inline-block;background:rgba(225,29,72,.1);color:#e11d48;padding:6px 12px;margin:4px 6px 4px 0;border-radius:20px;font-size:14px;font-weight:500;border:1px solid rgba(225,29,72,.3);transition:all .3s; }
+        .skill-tag:hover { background:#e11d48;color:#fff;transform:translateY(-2px); }
+        .info-card { background:var(--card-bg);border-radius:15px;padding:25px;border:1px solid var(--border);backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,.3);transition:all .3s; }
+        .info-card:hover { transform:translateY(-5px);box-shadow:0 12px 40px rgba(225,29,72,.2);border-color:rgba(225,29,72,.4); }
+        .info-header { border-bottom:2px solid rgba(225,29,72,.3);padding-bottom:15px;margin-bottom:20px; }
+        .info-item { display:flex;align-items:center;margin-bottom:15px;padding:10px;border-radius:8px;transition:all .3s; }
+        .info-item:hover { background:rgba(225,29,72,.1);transform:translateX(5px); }
+        .info-item i { font-size:18px;margin-right:15px;width:25px;text-align:center; }
+        .info-item div { display:flex;flex-direction:column; }
+        .info-label { font-size:12px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;font-weight:600; }
+        .info-value { font-size:16px;color:#fff;font-weight:500;margin-top:2px; }
+        .info-value a { text-decoration:none;color:#fff; transition:color .3s; }
+        .info-value a:hover { color:#e11d48!important; }
+        .story-content p { font-size:16px;line-height:1.7;color:#d1d5db; }
+
+        /* ─── SECTION HEADER ──────────────────────── */
+        .section-icon { width:80px;height:80px;background:linear-gradient(45deg,#e11d48,#fda4af);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;animation:pulse 2s infinite; }
+        .section-icon i { font-size:32px;color:#fff; }
+        .section-title { font-size:48px;font-weight:700;background:linear-gradient(45deg,#fff,#fda4af);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+        .section-subtitle { font-size:18px;color:#9ca3af;max-width:600px;margin:0 auto; }
+
+        /* ─── PROJECTS ────────────────────────────── */
+        #section_4 { background: linear-gradient(180deg, transparent 0%, rgba(225,29,72,0.03) 50%, transparent 100%); }
+
+        .projects-filter { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
+        .filter-btn { background:var(--card-bg); color:#9ca3af; padding:8px 20px; border-radius:25px; font-size:14px; font-weight:500; border:1px solid var(--border); cursor:pointer; transition:all .3s; }
+        .filter-btn.active, .filter-btn:hover { background:#e11d48; color:#fff; border-color:#e11d48; }
+
+        .projects-masonry {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        @media(max-width:900px) { .projects-masonry { grid-template-columns: repeat(2,1fr); } }
+        @media(max-width:600px) { .projects-masonry { grid-template-columns: 1fr; } }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: all .4s cubic-bezier(.175,.885,.32,1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .project-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 24px 50px rgba(225,29,72,.22); border-color:rgba(225,29,72,.4); }
+        .project-card.featured-card { grid-column: span 2; }
+        @media(max-width:900px){ .project-card.featured-card { grid-column: span 1; } }
+
+        .project-img-wrap { position:relative; overflow:hidden; height:200px; }
+        .project-card.featured-card .project-img-wrap { height:260px; }
+        .project-img-wrap img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+        .project-card:hover .project-img-wrap img { transform:scale(1.08); }
+
+        /* Website preview image area */
+        .project-img-preview {
+            width:100%; height:100%;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            background: linear-gradient(135deg, rgba(225,29,72,0.1), rgba(253,164,175,0.05));
+            gap: 12px; position: relative; overflow: hidden;
+        }
+        .project-img-preview .preview-favicon {
+            width: 52px; height: 52px; border-radius: 12px;
+            object-fit: contain; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px;
+        }
+        .project-img-preview .preview-url {
+            font-size: 13px; color: rgba(255,255,255,0.5);
+            font-family: monospace; letter-spacing: 0.3px;
+        }
+        .project-img-preview .preview-screenshot {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: top;
+            transition: transform 6s ease;
+        }
+        .project-card:hover .project-img-preview .preview-screenshot { transform: translateY(-30%); }
+        .project-img-preview .preview-screenshot-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+            background: linear-gradient(to top, rgba(13,13,16,1), transparent);
+        }
+
+        .project-img-placeholder {
+            width:100%; height:100%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:60px;
+            background: linear-gradient(135deg, rgba(225,29,72,0.12), rgba(253,164,175,0.06));
+        }
+
+        .project-overlay {
+            position:absolute; top:0;left:0;right:0;bottom:0;
+            background:linear-gradient(to bottom, transparent 40%, rgba(13,13,16,.95) 100%);
+            opacity:0; transition:opacity .3s;
+            display:flex; align-items:flex-end; padding:20px; gap:10px;
+        }
+        .project-card:hover .project-overlay { opacity:1; }
+        .overlay-btn {
+            flex:1; display:inline-flex; align-items:center; justify-content:center;
+            padding:10px; border-radius:10px; text-decoration:none; font-size:13px; font-weight:600;
+            transition:all .3s; border:1px solid rgba(255,255,255,.2); color:#fff;
+            background:rgba(255,255,255,.1); backdrop-filter:blur(6px);
+        }
+        .overlay-btn:hover { background:#e11d48; border-color:#e11d48; color:#fff; }
+        .overlay-btn i { margin-right:6px; }
+
+        .project-tag-strip {
+            position:absolute; top:15px; left:15px;
+            display:flex; gap:6px;
+        }
+        .proj-cat { background:linear-gradient(45deg,#e11d48,#fda4af); color:#fff; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+        .proj-featured-badge { background:rgba(255,215,0,.9); color:#000; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:700; }
+
+        .project-body { padding:22px; flex-grow:1; display:flex; flex-direction:column; }
+        .project-title { font-size:20px; color:#fff; font-weight:700; margin-bottom:8px; }
+        .project-desc { color:#9ca3af; font-size:14px; line-height:1.6; margin-bottom:16px; flex-grow:1; }
+        .proj-techs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+        .proj-tech { background:rgba(225,29,72,.1); color:#fda4af; padding:4px 10px; border-radius:10px; font-size:12px; font-weight:500; border:1px solid rgba(225,29,72,.2); }
+
+        .project-links { display:flex; gap:10px; }
+        .proj-link { flex:1; display:inline-flex; align-items:center; justify-content:center; padding:9px 14px; border-radius:10px; text-decoration:none; font-size:13px; font-weight:600; transition:all .3s; border:1px solid rgba(225,29,72,.3); color:#e11d48; }
+        .proj-link:hover { background:#e11d48; color:#fff; transform:translateY(-2px); }
+        .proj-link.primary-link { background:#e11d48; color:#fff; border-color:#e11d48; }
+        .proj-link.primary-link:hover { background:#c91738; }
+        .proj-link i { margin-right:5px; }
+
+        .no-projects { text-align:center; padding:60px 20px; color:#9ca3af; grid-column:1/-1; }
+        .no-projects i { font-size:64px; color:rgba(225,29,72,.3); display:block; margin-bottom:20px; }
+
+        /* ─── Projects Bottom Bar ─────────────────── */
+        .projects-bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 24px 32px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .projects-bottom-bar .bar-left {
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .projects-bottom-bar .bar-label {
+            font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
+        }
+        .projects-bottom-bar .bar-tagline {
+            font-size: 16px; color: #d1d5db; font-weight: 500;
+        }
+        .github-cta-btn {
+            display:inline-flex; align-items:center; gap:10px;
+            background:linear-gradient(45deg,#e11d48,#fda4af); color:#fff;
+            padding:13px 28px; border-radius:25px; text-decoration:none; font-weight:700;
+            font-size:15px; transition:all .3s; box-shadow:0 4px 15px rgba(225,29,72,.3);
+            white-space: nowrap;
+        }
+        .github-cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(225,29,72,.5); color:#fff; }
+
+        /* ─── CONTACT ─────────────────────────────── */
+        .contact-info-card { background:var(--card-bg);border-radius:20px;padding:30px;border:1px solid var(--border);backdrop-filter:blur(10px);height:100%; }
+        .info-icon { width:50px;height:50px;background:linear-gradient(45deg,#e11d48,#fda4af);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:20px;flex-shrink:0; }
+        .info-icon i { font-size:20px;color:#fff; }
+        .info-content h4 { color:#fff;font-size:16px;font-weight:600;margin-bottom:5px; }
+        .info-content p { color:#d1d5db;margin:0; }
+        .info-content a { color:#d1d5db;text-decoration:none;transition:color .3s; }
+        .info-content a:hover { color:#e11d48; }
+        .social-links { display:flex;gap:15px; }
+        .social-link { width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;font-size:18px; }
+        .social-link.twitter { background:#1da1f2;color:#fff; }
+        .social-link.instagram { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff; }
+        .social-link.whatsapp { background:#25d366;color:#fff; }
+        .social-link.email { background:#ea4335;color:#fff; }
+        .social-link:hover { transform:translateY(-3px) scale(1.1);box-shadow:0 8px 25px rgba(0,0,0,.3); }
+        .contact-form-card { background:var(--card-bg);border-radius:20px;padding:30px;border:1px solid var(--border);backdrop-filter:blur(10px); }
+        .form-label { color:#fff;font-weight:500;margin-bottom:8px;display:block; }
+        .form-control { background:rgba(255,255,255,.1);border:1px solid rgba(225,29,72,.3);border-radius:10px;padding:15px 50px 15px 15px;color:#fff;font-size:16px;transition:all .3s;width:100%; }
+        .form-control:focus { outline:none;border-color:#e11d48;background:rgba(255,255,255,.15);box-shadow:0 0 0 3px rgba(225,29,72,.1); }
+        .form-control::placeholder { color:#9ca3af; }
+        .form-icon { position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#e11d48;font-size:18px; }
+        .submit-btn { background:linear-gradient(45deg,#e11d48,#fda4af);color:#fff;border:none;padding:15px 30px;border-radius:25px;font-weight:600;font-size:16px;display:inline-flex;align-items:center;gap:10px;transition:all .3s;cursor:pointer; }
+        .submit-btn:hover { transform:translateY(-2px);box-shadow:0 8px 25px rgba(225,29,72,.4); }
+        .quick-contact { background:var(--card-bg);border-radius:20px;padding:40px;text-align:center;border:1px solid var(--border);backdrop-filter:blur(10px); }
+        .whatsapp-btn { background:linear-gradient(45deg,#25d366,#128c7e);color:#fff;text-decoration:none;padding:15px 30px;border-radius:30px;font-weight:600;font-size:18px;display:inline-flex;align-items:center;gap:10px;transition:all .3s;box-shadow:0 4px 15px rgba(37,211,102,.3); }
+        .whatsapp-btn:hover { transform:translateY(-3px);box-shadow:0 8px 25px rgba(37,211,102,.4);color:#fff; }
+
+        @media(max-width:768px) {
+            .hero-main-title { font-size:42px; }
+            .hero-subtitle { font-size:22px; }
+            .section-title { font-size:36px; }
+            .projects-bottom-bar { justify-content: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="preloader">
+        <div class="spinner"><span class="spinner-rotate"></span></div>
+    </section>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="index.html" class="navbar-brand mx-auto mx-lg-0">Begin</a>
+            <div class="d-flex align-items-center d-lg-none">
+                <i class="navbar-icon bi-telephone-plus me-3"></i>
+                <a class="custom-btn btn" href="tel:9717740251">9717740251</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-5">
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">About</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_4">Contact</a></li>
+                </ul>
+                <div class="d-lg-flex align-items-center d-none ms-auto">
+                    <i class="navbar-icon bi-telephone-plus me-3"></i>
+                    <a class="custom-btn btn" href="tel:9717740251">9717740251</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ─── HERO ──────────────────────────────── -->
+        <section class="hero d-flex justify-content-center align-items-center" id="section_1">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6 col-12">
+                        <div class="hero-content">
+                            <div class="greeting-badge mb-4">
+                                <span class="badge-text"><i class="bi bi-hand-thumbs-up-fill me-2"></i>Available for Freelance Work</span>
+                            </div>
+                            <h1 class="hero-main-title">
+                                <span class="title-line-1">Hello, I'm</span>
+                                <span class="title-line-2">Vaibhav Tiwari</span>
+                            </h1>
+                            <h2 class="hero-subtitle"><span class="typing-text">Web Designer</span></h2>
+                            <p class="hero-description">I create stunning, responsive websites and digital experiences that help businesses grow and succeed in the digital world.</p>
+                            <div class="hero-skills mb-4">
+                                <span class="skill-chip">JavaScript</span>
+                                <span class="skill-chip">Node.js</span>
+                                <span class="skill-chip">CSS3</span>
+                                <span class="skill-chip">HTML5</span>
+                                <span class="skill-chip">React</span>
+                                <span class="skill-chip">MongoDB</span>
+                                <span class="skill-chip">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+                        <div class="hero-image-container text-center">
+                            <div class="hero-image-wrapper d-inline-block">
+                                <div class="image-glow"></div>
+                                <img src="images/1760791655271.jpg" class="hero-image img-fluid" alt="Vaibhav Tiwari">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── ABOUT ─────────────────────────────── -->
+        <section class="about section-padding" id="section_2">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-12 text-center mb-5 mb-lg-0">
+                        <div class="profile-image-wrapper">
+                            <img src="images/vaibhav.jpg" class="about-image img-fluid rounded-circle shadow-lg" alt="Vaibhav Tiwari" style="width:340px;height:340px;object-fit:cover;border:4px solid #e11d48;">
+                            <div class="profile-badge mt-3">
+                                <span class="badge bg-danger fs-6 px-3 py-2">Web Designer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="row">
+                            <div class="col-lg-7 col-12 mb-4 mb-lg-0">
+                                <div class="about-thumb">
+                                    <div class="section-title-wrap mb-4">
+                                        <h2 class="text-white mb-3">My Story</h2>
+                                        <div class="title-underline"></div>
+                                    </div>
+                                    <h3 class="text-white mb-4">A little bit about Vaibhav</h3>
+                                    <div class="story-content">
+                                        <p class="mb-3">Hello! I am <strong class="text-danger">Vaibhav Tiwari</strong>, a passionate developer and designer focused on crafting clean, modern, and performant experiences for the web.</p>
+                                        <p class="mb-4">I enjoy building responsive UIs, accessible components, and fast sites. With a keen eye for detail and a love for clean code, I transform ideas into beautiful digital experiences.</p>
+                                        <div>
+                                            <span class="skill-tag">JavaScript</span>
+                                            <span class="skill-tag">Node.js</span>
+                                            <span class="skill-tag">CSS3</span>
+                                            <span class="skill-tag">HTML5</span>
+                                            <span class="skill-tag">React</span>
+                                            <span class="skill-tag">MongoDB</span>
+                                            <span class="skill-tag">Firebase</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-12">
+                                <div class="info-card">
+                                    <div class="info-header">
+                                        <h4 class="text-white mb-0"><i class="bi bi-person-circle me-2"></i>Contact Info</h4>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-person-fill text-danger"></i>
+                                        <div><span class="info-label">Name</span><span class="info-value">Vaibhav Tiwari</span></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-calendar-event text-danger"></i>
+                                        <div><span class="info-label">Birthday</span><span class="info-value">June 07, 2006</span></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-telephone-fill text-danger"></i>
+                                        <div><span class="info-label">Phone</span><span class="info-value"><a href="tel:9717740251">9717740251</a></span></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-envelope-fill text-danger"></i>
+                                        <div><span class="info-label">Email</span><span class="info-value"><a href="mailto:vt665962@gmail.com">vt665962@gmail.com</a></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PROJECTS ──────────────────────────── -->
+        <section class="section-padding" id="section_3">
+            <div class="container">
+
+                <!-- Header -->
+                <div class="section-header text-center mb-5">
+                    <div class="section-icon-wrapper mb-4">
+                        <div class="section-icon"><i class="bi bi-briefcase-fill"></i></div>
+                    </div>
+                    <h2 class="section-title mb-3">My Projects</h2>
+                    <div class="title-underline mx-auto mb-4"></div>
+                    <p class="section-subtitle">A curated showcase of my work — from concept to deployment</p>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="projects-filter" id="filterBar">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-masonry" id="projectsGrid">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <!-- Bottom bar: tagline on left, GitHub button on right -->
+                <div class="projects-bottom-bar">
+                    <div class="bar-left">
+                        <span class="bar-label">Open Source</span>
+                        <span class="bar-tagline">All my code is available on GitHub</span>
+                    </div>
+                    <a href="https://github.com/IamVT07" target="_blank" class="github-cta-btn">
+                        <i class="bi bi-github"></i> View on GitHub
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─── CONTACT ───────────────────────────── -->
+        <section class="contact section-padding" id="section_4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <div class="section-header text-center mb-5">
+                            <div class="section-icon-wrapper mb-4">
+                                <div class="section-icon"><i class="bi bi-chat-heart-fill"></i></div>
+                            </div>
+                            <h2 class="section-title mb-3">Let's Connect</h2>
+                            <div class="title-underline mx-auto mb-4"></div>
+                            <p class="section-subtitle">Ready to bring your ideas to life? Let's start a conversation!</p>
+                        </div>
+                        <div class="row g-5">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="contact-info-card">
+                                    <div class="info-header">
+                                        <h3 class="text-white mb-4"><i class="bi bi-person-circle me-2"></i>Get In Touch</h3>
+                                    </div>
+                                    <div style="margin-bottom:30px;">
+                                        <div class="info-item" style="display:flex;align-items:center;margin-bottom:25px;padding:15px;border-radius:10px;transition:all .3s;">
+                                            <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+                                            <div class="info-content"><h4>Phone</h4><p><a href="tel:9717740251">+91 9717740251</a></p></div>
+                                        </div>
+                                        <div class="info-item" style="display:flex;align-items:center;margin-bottom:25px;padding:15px;border-radius:10px;">
+                                            <div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
+                                            <div class="info-content"><h4>Email</h4><p><a href="mailto:vt665962@gmail.com">vt665962@gmail.com</a></p></div>
+                                        </div>
+                                        <div class="info-item" style="display:flex;align-items:center;padding:15px;border-radius:10px;">
+                                            <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                                            <div class="info-content"><h4>Location</h4><p>India</p></div>
+                                        </div>
+                                    </div>
+                                    <div style="border-top:1px solid rgba(225,29,72,.2);padding-top:25px;">
+                                        <h4 class="text-white mb-3">Follow Me</h4>
+                                        <div class="social-links">
+                                            <a href="https://x.com/44Vaibhav54660" target="_blank" class="social-link twitter"><i class="bi bi-twitter"></i></a>
+                                            <a href="https://instagram.com/i_am_v.t" target="_blank" class="social-link instagram"><i class="bi bi-instagram"></i></a>
+                                            <a href="https://wa.me/9717740251" target="_blank" class="social-link whatsapp"><i class="bi bi-whatsapp"></i></a>
+                                            <a href="mailto:vt665962@gmail.com" class="social-link email"><i class="bi bi-envelope"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-6 col-12">
+                                <div class="contact-form-card">
+                                    <h3 class="text-white mb-3"><i class="bi bi-send me-2"></i>Send Message</h3>
+                                    <p style="color:#9ca3af;margin-bottom:25px;">Have a project in mind? Let's discuss how I can help you achieve your goals.</p>
+                                    <form id="contactForm" role="form">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="form-group" style="position:relative;margin-bottom:20px;">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                <div class="form-icon"><i class="bi bi-person"></i></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" style="position:relative;margin-bottom:20px;">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                <div class="form-icon"><i class="bi bi-envelope"></i></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" style="position:relative;margin-bottom:20px;">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone">
+                <div class="form-icon"><i class="bi bi-telephone"></i></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" style="position:relative;margin-bottom:20px;">
+                <label class="form-label">Subject</label>
+                <select id="subject" name="subject" class="form-control" required>
+                    <option value="">Select a service</option>
+                    <option>Website Development</option>
+                    <option>Brand Identity</option>
+                    <option>E-commerce Solution</option>
+                    <option>Other</option>
+                </select>
+                <div class="form-icon"><i class="bi bi-list-ul"></i></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group" style="position:relative;margin-bottom:20px;">
+                <label class="form-label">Project Details</label>
+                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="submit-btn">
+                <span>Send Message</span><i class="bi bi-send"></i>
+            </button>
+        </div>
+    </div>
+</form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-contact mt-5">
+                            <h3 class="text-white mb-3">Prefer a Quick Chat?</h3>
+                            <p style="color:#9ca3af;margin-bottom:20px;">Connect with me directly on WhatsApp for instant communication.</p>
+                            <a href="https://wa.me/9717740251" class="whatsapp-btn" target="_blank">
+                                <i class="bi bi-whatsapp"></i><span>Chat on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-text-wrap">
+                        <p class="mb-0"><span class="copyright-text">Copyright © 2025 Vaibhav Tiwari. All rights reserved.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/click-scroll.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script>
+    /* ═══════════════════════════════════════
+       PROJECT MANAGER — localStorage-based
+       ═══════════════════════════════════════ */
+
+    const STORAGE_KEY = 'vt_projects_v2';
+
+    /*
+     * Projects now support a `siteUrl` field.
+     * When provided, the card automatically:
+     *   1. Shows a scrolling screenshot via Microlink / screenshot API
+     *   2. Shows the site favicon
+     *   3. Uses the URL as the live-demo link if `live` is empty
+     *
+     * To add your own project with a live website, just add a `siteUrl`.
+     */
+    const defaultProjects = [
+        {
+            id: 'p1',
+            title: 'InstaAssign',
+            category: 'Web App',
+            desc: 'A smart assignment and task management platform built for students and educators within their deadline.',
+            techs: ['JavaScript', 'CSS3', 'HTML5', 'Firebase'],
+            siteUrl: 'https://instaassign.in',
+            imgUrl: '',
+            emoji: '📋',
+            live: 'https://instaassign.in',
+            github: 'https://github.com/IamVT07',
+            featured: false
+        },
+        {
+            id: 'p2',
+            title: 'CNath',
+            category: 'Web App',
+            desc: 'A feature-rich web platform delivering a seamless digital experience. Built with performance and clean UI in mind.',
+            techs: ['JavaScript', 'CSS3', 'HTML5'],
+            siteUrl: 'https://cnath.in',
+            imgUrl: '',
+            emoji: '🌐',
+            live: 'https://cnath.in',
+            github: 'https://github.com/IamVT07',
+            featured: false
+        },
+            {
+                 id: 'p4',
+            title: 'Convience',
+            category: 'Web App',
+            desc: 'A web app that does something amazing. Built with HTML5, CSS3, and JavaScript.',
+            techs: ['HTML5','CSS3', 'JavaScript'],
+            siteUrl: 'https://convience.vercel.app',
+            imgUrl: '',
+            emoji: '❤️',
+            live: 'https://convience.vercel.app',
+            github: 'https://github.com/IamVT07',
+            featured: false
+            }
+    ];
+
+    let projects = [];
+    let activeFilter = 'all';
+
+    /* ── Helpers ── */
+    function escHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    /* ── URL Preview helpers ──
+     *
+     * We use two free, no-key services:
+     *  • Favicon  → Google's favicon service (always works, CORS-safe)
+     *  • Screenshot → Microlink screenshot API (free tier, 50 req/day)
+     *
+     * If the screenshot fails to load the onerror handler gracefully
+     * falls back to showing just the favicon + URL text.
+     */
+    function faviconUrl(siteUrl) {
+        try {
+            const origin = new URL(siteUrl).origin;
+            return `https://www.google.com/s2/favicons?sz=64&domain_url=${encodeURIComponent(origin)}`;
+        } catch(e) { return ''; }
+    }
+
+    function screenshotUrl(siteUrl) {
+        // Microlink free screenshot — returns a direct image URL
+        return `https://api.microlink.io/?url=${encodeURIComponent(siteUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
+    }
+
+    function buildImageContent(p) {
+        if (p.siteUrl) {
+            const favicon = faviconUrl(p.siteUrl);
+            const screenshot = screenshotUrl(p.siteUrl);
+            const displayUrl = p.siteUrl.replace(/^https?:\/\//, '');
+            return `
+                <div class="project-img-preview" id="preview-${escHtml(p.id)}">
+                    <img
+                        class="preview-screenshot"
+                        src="${escHtml(screenshot)}"
+                        alt="Preview of ${escHtml(p.title)}"
+                        loading="lazy"
+                        onerror="this.style.display='none'; document.getElementById('fallback-${escHtml(p.id)}').style.display='flex';"
+                    >
+                    <div class="preview-screenshot-overlay"></div>
+                    <!-- Fallback shown if screenshot fails -->
+                    <div id="fallback-${escHtml(p.id)}" style="display:none; flex-direction:column; align-items:center; gap:12px; position:relative; z-index:2;">
+                        <img class="preview-favicon" src="${escHtml(favicon)}" alt="favicon" onerror="this.style.display='none'">
+                        <span class="preview-url">${escHtml(displayUrl)}</span>
+                    </div>
+                </div>`;
+        }
+        if (p.imgUrl) {
+            return `<img src="${escHtml(p.imgUrl)}" alt="${escHtml(p.title)}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-img-placeholder" style="display:none;">${p.emoji || '🚀'}</div>`;
+        }
+        return `<div class="project-img-placeholder">${p.emoji || '🚀'}</div>`;
+    }
+
+    /* ── Storage ── */
+    function loadProjects() {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            projects = stored ? JSON.parse(stored) : defaultProjects;
+        } catch(e) { projects = defaultProjects; }
+    }
+
+    function saveProjects() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    }
+
+    /* ── Filter Bar ── */
+    function getCategories() {
+        return [...new Set(projects.map(p => p.category).filter(Boolean))];
+    }
+
+    function renderFilterBar() {
+        const bar = document.getElementById('filterBar');
+        const cats = getCategories();
+        bar.innerHTML = `<button class="filter-btn ${activeFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All <span style="background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;margin-left:6px;font-size:12px;">${projects.length}</span></button>`;
+        cats.forEach(cat => {
+            const count = projects.filter(p => p.category === cat).length;
+            bar.innerHTML += `<button class="filter-btn ${activeFilter === cat ? 'active' : ''}" onclick="setFilter('${escHtml(cat)}')">${escHtml(cat)} <span style="background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;margin-left:6px;font-size:12px;">${count}</span></button>`;
+        });
+    }
+
+    function setFilter(val) {
+        activeFilter = val;
+        renderFilterBar();
+        renderProjects();
+    }
+
+    /* ── Projects Grid ── */
+    function renderProjects() {
+        const grid = document.getElementById('projectsGrid');
+        const filtered = activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter);
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-projects"><i class="bi bi-folder-x"></i><p style="font-size:18px;color:#fff;margin-bottom:8px;">No projects yet</p><p>No projects in this category.</p></div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map((p, i) => {
+            const imgContent = buildImageContent(p);
+            const liveUrl = p.live || p.siteUrl || '';
+            const techs = (p.techs || []).map(t => `<span class="proj-tech">${escHtml(t)}</span>`).join('');
+            const liveBtn = liveUrl ? `<a href="${escHtml(liveUrl)}" target="_blank" class="proj-link primary-link"><i class="bi bi-box-arrow-up-right"></i>Live Site</a>` : '';
+            const ghBtn = p.github ? `<a href="${escHtml(p.github)}" target="_blank" class="proj-link"><i class="bi bi-github"></i>GitHub</a>` : '';
+            const overlayLive = liveUrl ? `<a href="${escHtml(liveUrl)}" target="_blank" class="overlay-btn"><i class="bi bi-box-arrow-up-right"></i>Visit Site</a>` : '';
+            const overlayGh = p.github ? `<a href="${escHtml(p.github)}" target="_blank" class="overlay-btn"><i class="bi bi-github"></i>Code</a>` : '';
+            const featBadge = p.featured ? `<span class="proj-featured-badge">⭐ Featured</span>` : '';
+
+            return `
+            <div class="project-card ${p.featured ? 'featured-card' : ''}" style="animation:fadeSlideUp .4s ease ${i * 0.08}s both;">
+                <div class="project-img-wrap">
+                    ${imgContent}
+                    <div class="project-overlay">${overlayLive}${overlayGh}</div>
+                    <div class="project-tag-strip">
+                        <span class="proj-cat">${escHtml(p.category || 'Project')}</span>
+                        ${featBadge}
+                    </div>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">${escHtml(p.title)}</h3>
+                    <p class="project-desc">${escHtml(p.desc)}</p>
+                    <div class="proj-techs">${techs}</div>
+                    <div class="project-links">
+                        ${liveBtn}${ghBtn}
+                        ${(!liveBtn && !ghBtn) ? '<span style="color:#6b7280;font-size:13px;">No links added</span>' : ''}
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    /* ── Fade-in animation ── */
+    const style = document.createElement('style');
+    style.textContent = '@keyframes fadeSlideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}';
+    document.head.appendChild(style);
+
+    /* ── Init ── */
+    loadProjects();
+    renderFilterBar();
+    renderProjects();
+    </script>
+</body>
+</html>
