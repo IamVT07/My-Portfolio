@@ -1,76 +1,83 @@
-// portfolio server/server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Allows cross-origin requests
-const nodemailer = require('nodemailer'); // 🔴 1. Nodemailer को यहाँ जोड़ा गया
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// 1. MONGO DB CONNECTION SETUP (USING MONGOOSE)
-const mongoURL = process.env.MONGODB_URI;
-
-mongoose.connect(mongoURL)
-  .then(() => console.log('✅ MongoDB connected successfully!'))
-  .catch(err => {
-      console.error('MongoDB connection error:', err);
-  });
-
-// 2. MIDDLEWARE
+// MIDDLEWARE - CORS को सिंपल रखें ताकि Vercel के किसी भी सबडोमेन से रिक्वेस्ट आ सके
 app.use(cors()); 
-app.use(express.json()); 
+app.use(express.json());
 
-// 3. MONGODB SCHEMA/MODEL
+// MONGODB SCHEMA/MODEL
 const ContactSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    phone: String,
-    subject: String,
-    message: { type: String, required: true },
+    name:      { type: String, required: true },
+    email:     { type: String, required: true },
+    phone:     String,
+    subject:   String,
+    message:   { type: String, required: true },
     timestamp: { type: Date, default: Date.now }
 });
-const Contact = mongoose.model('Contact', ContactSchema);
 
-// 4. API ROUTE TO RECEIVE FORM DATA
-app.post('/api/contact', async (req, res) => {
-    // Check if MongoDB is actually connected before trying to save
-    if (mongoose.connection.readyState !== 1) {
-        return res.status(503).json({ message: 'Database service unavailable.' });
+const Contact = mongoose.models.Contact || 
+                mongoose.model('Contact', ContactSchema);
+
+// SERVERLESS DATABASE CONNECTION
+let cached = global.mongoose || { conn: null };
+
+async function connectDB() {
+    if (cached.conn && mongoose.connection.readyState === 1) {
+        console.log('=> Using existing database connection');
+        return cached.conn;
     }
-    
+    console.log('=> Creating new database connection...');
+    cached.conn = await mongoose.connect(process.env.MONGODB_URI, {
+        serverSelectionTimeoutMS: 8000,
+        bufferCommands: false,
+    });
+    global.mongoose = cached;
+    console.log('✅ MongoDB connected successfully!');
+    return cached.conn;
+}
+
+// API ROUTE
+app.post('/api/contact', async (req, res) => {
     try {
-        // डेटाबेस में सेव करने का काम 
+        // Connect to DB
+        await connectDB();
+
+        // Save to MongoDB
         const newContact = new Contact(req.body);
         await newContact.save();
-        
-        // =========================================================
-        // 🔴 2. ईमेल भेजने वाला कोड (डेटाबेस में सेव होने के तुरंत बाद)
-        // =========================================================
+        console.log('✅ Data saved to MongoDB!');
+
+        // Send Email
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER,  // अपना जीमेल आईडी डालें
-                pass: process.env.EMAIL_PASS // Google App Password डालें (बिना स्पेस के)
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
             }
         });
 
-        const mailOptions = {
-            from: process.env.EMAIL_USER, // भेजने वाला (आपका ईमेल)
-            to: process.env.EMAIL_USER,   // जिसे मैसेज मिलेगा (आपका ईमेल)
+        await transporter.sendMail({
+            from:    process.env.EMAIL_USER,
+            to:      process.env.EMAIL_USER,
             subject: `🚀 New Portfolio Message from ${req.body.name}`,
-            text: `Hello,\n\nYou got a new message on your portfolio!\n\nName: ${req.body.name}\nEmail: ${req.body.email}\nPhone: ${req.body.phone}\nSubject: ${req.body.subject}\nMessage:\n${req.body.message}`
-        };
+            text:    `Name: ${req.body.name}\nEmail: ${req.body.email}\nPhone: ${req.body.phone}\nSubject: ${req.body.subject}\nMessage: ${req.body.message}`
+        });
+        console.log('✅ Email sent!');
 
-        // ईमेल भेजें
-        await transporter.sendMail(mailOptions);
-        console.log('✅ Email sent successfully!');
-        // =========================================================
+        return res.status(201).json({ 
+            message: 'Message received, saved and emailed!' 
+        });
 
-        res.status(201).json({ message: 'Message successfully received, saved, and email sent!' });
     } catch (error) {
-        console.error('Error saving contact or sending email:', error);
-        res.status(500).json({ message: 'Server error during database save or email.', error: error.message });
+        console.error('❌ Error:', error.message);
+        return res.status(500).json({
+            message: 'Server error.',
+            error: error.message
+        });
     }
 });
 
